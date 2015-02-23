@@ -1,61 +1,64 @@
 <!DOCTYPE HTML>
 <html>
-		<head>
-			<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-			<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-			<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-			<!-- Latest compiled and minified CSS -->
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-			<!-- Optional theme -->
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-			<!-- Latest compiled and minified JavaScript -->
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-			
-			<title>oneGuide</title>	
-		</head>
-		<body>
-			<nav class="navbar navbar-default">
-			  <div class="container-fluid">
-				<div class="navbar-header">
-					 <a class="navbar-brand" href="#">
-							 oneGuide
-					 </a>
-				 </div>
-				 <form class="navbar-form navbar-left" role="search">
-						 <div class="form-group">
-								 <input type="text" class="form-control" placeholder="champion name">	
-						 </div>
-						 <button type="submit" class="btn btn-default">submit</button>
-				 </form>
-		        </div>
-			</nav>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-10" role="main">
-						<p>
-							dicks
-						</p>
-						<img src="http://www.chanmart.com/image/cache/data/designs/design_49aa8712-334a-11e4-8d87-008cfa12d540/design_image-500x500.png">
-						</img>
-					</div>
-					<div class="col-lg-2" role="complementary">
-						<nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" style="border-left:thick solid #99B2CC; height:100%; padding-left: 5px">
-							<div id="dicks">
-								<p>
-									smaller dicks
-								</p>
-								<p>
-									some more dickz
-								</p>
-							</div>
-						</nav>
-					</div>
-				</div>			
+		<title>oneGuide</title>	
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">oneGuide</a>
 			</div>
-		</body>
+			<form class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="champion name">	
+				</div>
+				<button type="submit" class="btn btn-default">submit</button>
+			</form>
+		</div>
+		</nav>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-10" role="main">
+					<p>
+						Selecting 'all' on the right side selects all players then creates the guide based on those players.	
+					</p>
+					<p>
+						However, you can also select as many players that you'd like in order to create a guide based on only those players.
+					</p>	
+				</div>
+				<div class="col-lg-2" role="complementary">
+					<nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix pull-right"> 
+						<div class="panel panel-primary panel-right"> 
+							<div class="panel-heading">
+								tracked players
+							</div>	
+							<div class="panel-body">
+								<ul class="nav nav-pills nav-stacked">
+									<li role="presentation" class="active"><a href="#">all</a></li>
+					   				<li role="presentation"><a href="#">Bjergsen</a></li>
+	    							<li role="presentation"><a href="#">TheOddOne</a></li>				   
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>			
+		</div>
+	</body>
 </html>
