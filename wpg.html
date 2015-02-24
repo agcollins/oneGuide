@@ -3,29 +3,41 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-    <!-- Latest compiled and minified CSS -->
+    <!-- bootstrap Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-    <!-- Optional theme -->
+    <!-- bootstrap theme theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-    <!-- Latest compiled and minified JavaScript -->
+    <!-- bootstrap compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <!-- angular cdn-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.js"></script>
+
+    <!--ui bootstrap angular directive typeahead -->
+    <script src="ui-bootstrap-custom-0.12.1.js"></script>
+    <script src="ui-bootstrap-custom-tpls-0.12.1.js"></script>
+
+    <!-- Basic js file -->
+    <script src="basic.js"></script>
 
     <title>oneGuide.lol</title>
   </head>
-  <body>
+  <body ng-app="oneGuideApp">
     <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
+      <div class="container-fluid" ng-controller="oneGuideController">
 	<div class="navbar-header">
 	  <a class="navbar-brand" href="#">oneGuide</a>
 	</div>
 	<form class="navbar-form navbar-left" role="search">
 	  <div class="form-group">
-	    <input type="text" class="form-control" placeholder="champion name">	
+	    <input type="text" class="form-control" ng-model="selectedChamp" 
+		   typeahead="name for name in champNames | filter:$viewValue | limitTo:8" autocomplete="off" placeholder="champion name">
 	  </div>
 	  <button type="submit" class="btn btn-default">submit</button>
 	</form>
