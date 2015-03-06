@@ -51,7 +51,7 @@
 						Free Champion Rotation</h2>
 					<div style="height:500px; width:85%; margin-left:auto; margin-right:auto;">
 						<carousel interval="3000" style="border: 5px solid #3c3c3c">
-						<slide ng-repeat="champ in freeChamps" active="slide.active">
+						<slide ng-repeat="champ in freeChamps" active="slide.active" ng-click="oneGuideController.selectedChamp = champ">
 						<img src="{{champ.imgsrc}}" style="margin:auto;">
 						<div class="carousel-caption">
 							<h4>{{champ.name}}</h4>

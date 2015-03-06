@@ -2,6 +2,7 @@ var app = angular.module('panelApp', ['ui.bootstrap']);
 
 app.controller('PanelController', function(){
 	this.allSelected = false;
+	//look for cookie
 	this.players = [
 		'TheOddOne','Imaqtpie','Bjergsen' //we need to read this from a json file
 	];	
