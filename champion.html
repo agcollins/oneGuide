@@ -26,6 +26,7 @@
 		<script src="basic.js"></script>
 		<!-- Angular File for the panel controller module -->
 		<script src="panel.js"></script>
+		<script src="champion.js"></script>
 
 		<title>oneGuide.lol</title>
 	</head>
@@ -48,8 +49,11 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-10">
-					<div class="row">
-						<h2 id="championname" style="margin-left: 1%; color:white">Ryze<small id="championdescription" style="margin-left: 1%">the dicklord</small></h2>
+					<div class="row" ng-controller="SkillController as skills">
+						<h2 id="championname" style="margin-left: 1%; color:white">{{skills.name}}
+							<small id="championdescription" style="margin-left: 1%">the dicklord
+							</small>
+						</h2>
 						<div class="col-sm-4">
 							<div class="well">
 								<img id="maxfirst" src="#" style="display:inline-block"/>
