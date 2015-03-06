@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 
-<html ng-app="ChampionApp">
+<html ng-app="oneGuideApp">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 
@@ -23,13 +23,13 @@
 		<!--ui bootstrap angular directives-->
 		<script src="ui-bootstrap-tpls-0.12.1.js"></script>
 
-		<!-- Angular File -->
+		<script src="basic.js"></script>
+		<!-- Angular File for the panel controller module -->
 		<script src="ngchamp.js"></script>
 
 		<title>oneGuide.lol</title>
 	</head>
 	<body style="background-color:#222">
-
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -47,13 +47,9 @@
 
 		<div class="container-fluid">
 			<div class="row">
-
 				<div class="col-sm-10">
-
 					<div class="row">
-
-						<h2 id="championname" style="margin-left: 1%">Ryze<small id="championdescription" style="margin-left: 1%">the dicklord</small></h2>
-						<img src="#"/>	
+						<h2 id="championname" style="margin-left: 1%; color:white">Ryze<small id="championdescription" style="margin-left: 1%">the dicklord</small></h2>
 						<div class="col-sm-4">
 							<div class="well">
 								<img id="maxfirst" src="#" style="display:inline-block"/>
@@ -65,9 +61,7 @@
 								<img id="maxfourth" src="#"style="display:inline-block"/>
 							</div>	
 						</div>
-
 					</div>
-
 					<div class="col-sm-6">
 					</div>
 				</div>	
@@ -75,7 +69,6 @@
 					<nav ng-controller="PanelController as panel"> 
 						<div class="panel panel-default panel-right"> 
 							<div class="panel-heading" style="background-image: linear-gradient(to bottom, #3C3C3C 0px, #222 100%); color:#9D9D9D; text-shadow:0px -1px 0px rgba(0, 0, 0, 0.25);">
-
 								tracked players
 							</div>	
 							<div class="panel-body" style="background-color:lightgrey">
@@ -94,6 +87,8 @@
 			</div>
 			<div class="row">
 				<!-- wut -->
+
+				<!-- maybe we can have a group of 6 buttons as the items below the skill ordering!!!!!!! -->
 			</div>
 		</div>
 	</body>

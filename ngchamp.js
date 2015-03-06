@@ -42,4 +42,4 @@ app.controller('PanelController', function(){
 			return (this.selected.indexOf(name)>-1); //do we need parentheses? 
 		}
 	};
-})
+});

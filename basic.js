@@ -1,7 +1,8 @@
 //api key: 43e187ef-e56e-4f24-bd58-1dbdc841abff
-angular.module("oneGuideApp", ["ui.bootstrap"]);
- 
-angular.module("oneGuideApp").controller("oneGuideController", function($scope, $http){
+
+var app = angular.module('oneGuideApp', ['ui.bootstrap','ChampionApp']);
+
+app.controller("oneGuideController", function($scope, $http){
 	$scope.selectedChamp = undefined;
 	$scope.champions = [];
 	$scope.champNames = [];
@@ -22,16 +23,16 @@ angular.module("oneGuideApp").controller("oneGuideController", function($scope, 
 				var name = data.name;
 				//this part is gross lol
 				if(name === "Kha'Zix")
-				name = "Khazix";
-			if(name === "Xin Zhao")
-				name = "XinZhao";
-			data["imgsrc"] = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + name + "_0.jpg";
+					name = "Khazix";
+				if(name === "Xin Zhao")
+					name = "XinZhao";
+				data["imgsrc"] = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + name + "_0.jpg";
 			$scope.freeChamps.push(data);
 			});
 		});
 	});
 });
-
+/*
 $(document).ready(function(){
 	$(".my-players > li").bind('click', function(e){
 		if($(this).hasClass('all-players')){
@@ -44,3 +45,4 @@ $(document).ready(function(){
 		}
 	});
 });
+*/
