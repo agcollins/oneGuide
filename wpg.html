@@ -25,6 +25,7 @@
 		<!-- Basic js file -->
 		<script src="basic.js"></script>
 		<script src="panel.js"></script> <!-- Dependency that contains our panel module and its respective controllers -->
+		<script src="build.js"></script>
 
 		<title>oneGuide.lol</title>
 	</head>
@@ -52,7 +53,9 @@
 					<div style="height:500px; width:85%; margin-left:auto; margin-right:auto;">
 						<carousel interval="3000" style="border: 5px solid #3c3c3c">
 						<slide ng-repeat="champ in freeChamps" active="slide.active" ng-click="oneGuideController.selectedChamp = champ">
-						<img src="{{champ.imgsrc}}" style="margin:auto;">
+						<a href="{{champ.href}}">
+							<img ng-src="{{champ.imgsrc}}" style="margin:auto;">
+						</a>
 						<div class="carousel-caption">
 							<h4>{{champ.name}}</h4>
 							<p>{{champ.title}}</p>

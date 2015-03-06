@@ -24,9 +24,9 @@
 		<script src="ui-bootstrap-tpls-0.12.1.js"></script>
 
 		<script src="basic.js"></script>
-		<!-- Angular File for the panel controller module -->
 		<script src="panel.js"></script>
 		<script src="champion.js"></script>
+		<script src="build.js"></script>
 
 		<title>oneGuide.lol</title>
 	</head>
@@ -48,27 +48,24 @@
 
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-10">
-					<div class="row" ng-controller="SkillController as skills">
-						<h2 id="championname" style="margin-left: 1%; color:white">{{skills.name}}
-							<small id="championdescription" style="margin-left: 1%">the dicklord
-							</small>
-						</h2>
+				<div class="col-sm-10" ng-controller="BuildController as build">
+					<div class="row"> 
 						<div class="col-sm-4">
+							<img ng-src="{{build.selectedChampion.loadingimg}}">
+						</div>
+
+						<div class="col-sm-8">
+							<h1 id="championname" style="color:#9D9D9D">{{build.selectedChampion.name}}</h1>
 							<div class="well">
-								<img id="maxfirst" src="#" style="display:inline-block"/>
-								<h2 style="display:inline-block">></h2>
-								<img id="maxsecond" src="#"style="display:inline-block"/>
-								<h2 style="display:inline-block">></h2>
-								<img id="maxthird" src="#"style="display:inline-block"/>
-								<h2 style="display:inline-block">></h2>
-								<img id="maxfourth" src="#"style="display:inline-block"/>
+								<h4 style="margin-top:0px">Final Build</h4>
+								<span ng-repeat="item in build.proBuild">
+									<img ng-src="{{item.imgsrc}}" style="display:inline-block; padding-right:5px"/>		
+								</span>
 							</div>	
 						</div>
-					</div>
-					<div class="col-sm-6">
-					</div>
-				</div>	
+					</div>	
+				</div>
+
 				<div class="col-sm-2">
 					<nav ng-controller="PanelController as panel"> 
 						<div class="panel panel-default panel-right"> 
@@ -88,7 +85,8 @@
 						</div>
 					</nav>
 				</div>
-			</div>
+			</div>	
 		</div>
-	</body>
+	</div>
+</body>
 </html>

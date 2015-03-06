@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('oneGuideApp', ['ui.bootstrap','panelApp', 'championApp']);
+	var app = angular.module('oneGuideApp', ['ui.bootstrap','panelApp','buildModule']);
 
 	app.controller("oneGuideController", function($scope, $http){
 		$scope.selectedChamp = undefined;
@@ -26,9 +26,14 @@
 					if(name === "Xin Zhao")
 						name = "XinZhao";
 					data["imgsrc"] = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + name + "_0.jpg";
-				$scope.freeChamps.push(data);
+					var loc = window.location.pathname;
+					var dir = loc.substring(0, loc.lastIndexOf('/'));
+					data["href"] = dir + '/champion.html?champion=' + data.id;
+					$scope.freeChamps.push(data);
 				});
 			});
 		});
+
+
 	});
 })();
