@@ -20,10 +20,13 @@ angular.module("oneGuideApp").controller("oneGuideController", function($scope, 
 	    $http.get("https://na.api.pvp.net/api/lol/static-data/na/v1.2/champion/" + champ["id"] + "?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff").success(function(data){
 		var name = data.name;
 		if(name === "Kha'Zix")
-		    name = "Khazix";
+		    data.name = "Khazix";
 		if(name === "Xin Zhao")
-		    name = "XinZhao";
-		data["imgsrc"] = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + name + "_0.jpg";
+		    data.name = "XinZhao";
+		data["imgsrc"] = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + data.name + "_0.jpg";
+		var loc = window.location.pathname;
+		var dir = loc.substring(0, loc.lastIndexOf('/'));
+		data["href"] = dir + '/champion.html?champion=' + data.id;
 		$scope.freeChamps.push(data);
 	    });
 	});
