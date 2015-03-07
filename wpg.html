@@ -47,11 +47,11 @@
 
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-12" ng-controller="CarouselController as carousel">
+				<div class="col-sm-12" ng-controller="CarController as carousel" >
 					<h2 style="text-align:center; color:white !important; text-shadow:0px -1px 0px rgba(0, 0, 0, 0.25); margin-top:0">
 						Free Champion Rotation</h2>
 					<div style="height:500px; width:85%; margin-left:auto; margin-right:auto;"> 
-						<carousel interval="3000" style="border: 5px solid #3c3c3c">
+						<carousel interval="3000" style="border: 5px solid #3c3c3c" >
 						<slide ng-repeat="champ in carousel.freeChamps" active="slide.active">
 							<a href="{{champ.href}}">
 								<img ng-src="{{champ.imgsrc}}" style="margin:auto;">

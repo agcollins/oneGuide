@@ -1,7 +1,7 @@
 (function(){
-	var app = angular.module('carouselModule', ['ui.bootstrap']);
+	var app = angular.module('carouselModule', []);
 
-	app.controller("CarouselController", ['$scope','$http', function($scope, $http){
+	app.controller("CarController", ['$http', function($http){
 		var controller = this;
 		controller.freeChamps = [];
 
