@@ -37,7 +37,7 @@
 	    <input type="text" class="form-control" ng-model="search.selectedChamp" 
 		   typeahead="name for name in search.champNames | filter:$viewValue | limitTo:8" autocomplete="off" placeholder="champion name">
 	  </div>
-	  <button type="submit" class="btn btn-default">submit</button>
+	  <button type="submit" class="btn btn-default" ng-click="search.loadBuild()" ng-disabled="!search.isValidName()">submit</button>
 	</form>
       </div>
     </nav>

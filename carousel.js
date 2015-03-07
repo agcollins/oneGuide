@@ -21,7 +21,6 @@
 					var dir = loc.substring(0, loc.lastIndexOf('/'));
 					data["href"] = dir + '/champion.html?champion=' + data.id;
 					controller.freeChamps.push(data);
-					console.log(controller.freeChamps);
 				});
 			});
 		});
