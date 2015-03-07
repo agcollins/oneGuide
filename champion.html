@@ -1,12 +1,8 @@
 <!DOCTYPE HTML>
 
-<html ng-app="oneGuideApp">
+<html ng-app="championApp">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-		<!-- jquery cdn -->
-		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-		<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
 		<!-- bootstrap Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -23,23 +19,23 @@
 		<!--ui bootstrap angular directives-->
 		<script src="ui-bootstrap-tpls-0.12.1.js"></script>
 
-		<script src="basic.js"></script>
-		<script src="panel.js"></script>
 		<script src="champion.js"></script>
+		<script src="panel.js"></script>
 		<script src="build.js"></script>
+		<script src="search.js"></script>
 
 		<title>oneGuide.lol</title>
 	</head>
-	<body style="background-color:#222" ng-controller="oneGuideController">
+	<body style="background-color:#222" >
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#">oneGuide</a>
 				</div>
-				<form class="navbar-form navbar-left" role="search">
+				<form class="navbar-form navbar-left" role="search" ng-controller="SearchController as search">
 					<div class="form-group">
-						<input type="text" class="form-control" ng-model="selectedChamp" 
-						typeahead="name for name in champNames | filter:$viewValue | limitTo:8" autocomplete="off" placeholder="champion name">
+						<input type="text" class="form-control" ng-model="search.selectedChamp" 
+						typeahead="name for name in search.champNames | filter:$viewValue | limitTo:8" autocomplete="off" placeholder="champion name">
 					</div>
 					<button type="submit" class="btn btn-default">submit</button>
 				</form>

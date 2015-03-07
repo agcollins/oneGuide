@@ -1,4 +1,4 @@
-var app = angular.module('panelApp', ['ui.bootstrap']);
+var app = angular.module('panelModule', ['ui.bootstrap']);
 
 app.controller('PanelController', function(){
 	this.allSelected = false;

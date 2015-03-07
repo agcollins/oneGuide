@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html ng-app="oneGuideApp"> 
+<html ng-app="mainApp"> 
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 
@@ -23,22 +23,22 @@
 		<script src="ui-bootstrap-tpls-0.12.1.js"></script>
 
 		<!-- Basic js file -->
-		<script src="basic.js"></script>
-		<script src="panel.js"></script> <!-- Dependency that contains our panel module and its respective controllers -->
-		<script src="build.js"></script>
+		<script src="main.js"></script>
+		<script src="carousel.js"></script>
+		<script src="search.js"></script>
 
 		<title>oneGuide.lol</title>
 	</head>
-	<body ng-controller="oneGuideController" style="background-color:#222">
+	<body style="background-color:#222">
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#">oneGuide</a>
 				</div>
-				<form class="navbar-form navbar-left" role="search">
+				<form class="navbar-form navbar-left" role="search" ng-controller="SearchController as search">
 					<div class="form-group">
-						<input type="text" class="form-control" ng-model="selectedChamp" 
-						typeahead="name for name in champNames | filter:$viewValue | limitTo:8" autocomplete="off" placeholder="champion name">
+						<input type="text" class="form-control" ng-model="search.selectedChamp" 
+						typeahead="name for name in search.champNames | filter:$viewValue | limitTo:8" autocomplete="off" placeholder="champion name">
 					</div>
 					<button type="submit" class="btn btn-default">submit</button>
 				</form>
@@ -47,42 +47,22 @@
 
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-10">
+				<div class="col-sm-12" ng-controller="CarouselController as carousel">
 					<h2 style="text-align:center; color:white !important; text-shadow:0px -1px 0px rgba(0, 0, 0, 0.25); margin-top:0">
 						Free Champion Rotation</h2>
-					<div style="height:500px; width:85%; margin-left:auto; margin-right:auto;">
+					<div style="height:500px; width:85%; margin-left:auto; margin-right:auto;"> 
 						<carousel interval="3000" style="border: 5px solid #3c3c3c">
-						<slide ng-repeat="champ in freeChamps" active="slide.active" ng-click="oneGuideController.selectedChamp = champ">
-						<a href="{{champ.href}}">
-							<img ng-src="{{champ.imgsrc}}" style="margin:auto;">
-						</a>
-						<div class="carousel-caption">
-							<h4>{{champ.name}}</h4>
-							<p>{{champ.title}}</p>
-						</div>
+						<slide ng-repeat="champ in carousel.freeChamps" active="slide.active">
+							<a href="{{champ.href}}">
+								<img ng-src="{{champ.imgsrc}}" style="margin:auto;">
+							</a>
+							<div class="carousel-caption">
+								<h4>{{champ.name}}</h4>
+								<p>{{champ.title}}</p>
+							</div>
 						</slide>
 						</carousel>
 					</div>
-				</div>
-				<div class="col-sm-2">
-					<nav ng-controller="PanelController as panel"> 
-						<div class="panel panel-default panel-right"> 
-							<div class="panel-heading" style="background-image: linear-gradient(to bottom, #3C3C3C 0px, #222 100%); color:#9D9D9D; text-shadow:0px -1px 0px rgba(0, 0, 0, 0.25);">
-
-								tracked players
-							</div>	
-							<div class="panel-body" style="background-color:lightgrey">
-								<ul class="nav nav-pills nav-stacked my-players">
-									<li role="presentation" ng-click="panel.select('all')" ng-class="{active: panel.isSelected('all')}">
-										<a href="#">all</a>
-									</li>
-									<li role="presentation" ng-repeat="playername in panel.players" ng-click="panel.select(playername)" ng-class="{active: panel.isSelected(playername)}">
-										<a href="#">{{playername}}</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</nav>
 				</div>
 			</div>
 		</div>
