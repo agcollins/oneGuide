@@ -30,7 +30,6 @@ app.controller('PanelController', function(){
 			}
 			else this.selected.push(name);
 
-			console.log(this.selected);
 		}
 	};
 	this.isSelected = function(name){
