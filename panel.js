@@ -1,6 +1,6 @@
 var app = angular.module('panelModule', ['ui.bootstrap', 'ngCookies']);
 
-app.controller('PanelController', ['$cookies', '$modal', '$scope', function($cookies, $modal, $scope){
+app.controller('PanelController', ['$cookies', '$modal', '$scope', '$http', function($cookies, $modal, $scope, $http){
 	//look for cookie
 	//NOTE: this behavior is deprecated. In newer angular, cookies use .get and .put functions, but we are using
 	//1.3.14, which doesn't have this yet.
@@ -20,39 +20,41 @@ app.controller('PanelController', ['$cookies', '$modal', '$scope', function($coo
 	$scope.players = this.players;
 	$scope.allSelected = this.allSelected;
 	$scope.selected = this.selected;
-	
+
 	var controller = this;
+	var proBuild = [];
 
-	var getGuide = function(player){
-		console.log("I am here.");
+	function getQueryStringValue (key) {  
+		return unescape(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+	}  
 
-		function getQueryStringValue (key) {  
-			return unescape(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
-		}  
+	function getPlayerId(name){
+		if(name=='undefined')
+			console.log('poop');
+		$http.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+name+'?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff').success(function(data){
+			//these keys are all lower case
+			return data[name.toLowerCase()].id;
+		}); 
+		//https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/Oshinova?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff
+	}
 
-		function getPlayerId(name){
-			$http.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+name+'?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff').success(function(data){
-				return data[name].id;
-			}); 
-		}
+	controller.selectedID = getQueryStringValue("champion");
 
-		var proBuild = [];
-		controller.selectedID = getQueryStringValue("champion");
-
-		$http.get("https://na.api.pvp.net/api/lol/static-data/na/v1.2/champion?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff").success(function(data){
-			var champs = data["data"]
-			for (var key in champs){
-				if(champs[key].id == controller.selectedID){
-					controller.selectedChampion = champs[key];
-					controller.selectedChampion["squareimg"] = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" + key + ".png";
-					controller.selectedChampion["loadingimg"] = "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + key + "_0.jpg";
-				}
-				controller.champions.push(champs[key]);
-				controller.champNames.push(champs[key]["name"]);
+	$http.get("https://na.api.pvp.net/api/lol/static-data/na/v1.2/champion?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff").success(function(data){
+		var champs = data["data"]
+		for (var key in champs){
+			if(champs[key].id == controller.selectedID){
+				controller.selectedChampion = champs[key];
+				controller.selectedChampion["squareimg"] = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" + key + ".png";
+				controller.selectedChampion["loadingimg"] = "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + key + "_0.jpg";
 			}
-		});
+		}
+	});
 
-		$http.get("https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/" + getPlayerId(player) + "/recent?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff").success(function(data) {
+	for(var p in controller.players){
+		var id = getPlayerId(controller.players[p]);	
+		console.log(id);
+		$http.get("http://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/" + getPlayerId(controller.players[p]) + "/recent?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff").success(function(data) {
 			var games = data.games;
 			for(var i = 0; i < games.length; i++){
 				game = games[i];
@@ -63,12 +65,11 @@ app.controller('PanelController', ['$cookies', '$modal', '$scope', function($coo
 							"imgsrc": "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" 
 							+ stats["item" + j] + ".png"});
 					}
-					console.log(proBuild);
-					return proBuild;	
+					break;
 				}
-			};
-		});
-	};	
+			}
+		})
+	};
 
 	this.select = function(name){
 
@@ -161,6 +162,7 @@ angular.module('panelModule').controller('AddPlayerController', function($http, 
 		var currPlayers = modalController.players;
 		var inputedName = modalController.summonerName;
 		console.log(currPlayers);
+
 		var index = currPlayers.indexOf(inputedName);
 		//already in list?
 		if(index > -1){
