@@ -55,7 +55,8 @@
 						</div>
 
 						<div class="col-sm-8">
-							<h1 id="championname" style="color:white">{{build.selectedChampion.name}}<small>{{'  - ' + build.selectedChampion.title}}</small></h1>
+							<h1 ng-hide="panel.selected.length === 0" id="championname" style="color:white">{{build.selectedChampion.name}}<small>{{'  - ' + build.selectedChampion.title}}</small></h1>
+							<h3 ng-show="panel.selected.length === 0" style="color: white">no players are selected.. <small>awkward..</small></h3>
 							<accordion close-others="false">
 								<accordion-group heading="{{player}}" ng-show="panel.isSelected(player)" ng-repeat="player in panel.players">
 									<h4 ng-hide="panel.proBuild[player].length === 0">{{"Final Build"}}</h4>
