@@ -50,12 +50,13 @@ app.controller('PanelController', ['$cookies', '$modal', '$scope', '$http', func
 					game = games[i];
 					if(game.championId == controller.selectedID){
 						var stats = game.stats;
+					    console.log(game.stats);
 						for(var j = 0; j <= 6; j++){
+						    if(stats["item" + j] != undefined)
 							controller.proBuild[name].push({"id": stats["item" + j], 
 								"imgsrc": "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" 
 								+ stats["item" + j] + ".png"});
 						}
-						console.log(controller.proBuild);
 						break;
 					}
 				}
