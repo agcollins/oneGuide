@@ -41,30 +41,27 @@ app.controller('PanelController', ['$cookies', '$modal', '$scope', '$http', func
 	controller.selectedID = getQueryStringValue("champion");
 
 	for(var p in controller.players){
-		function help(id, name){
+		function addBuild(id, name){
 			$http.get("https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/" + id + "/recent?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff").success(function(data) {
 
-				console.log(data);
-				//this is the past 10 games from the summoner.
-				console.log(name);
-				console.log(proBuild);
+				controller.proBuild[name] = [];
 				var games = data.games;
 				for(var i = 0; i < games.length; i++){
 					game = games[i];
 					if(game.championId == controller.selectedID){
 						var stats = game.stats;
-						for(var j = 1; j <= 6; j++){
+						for(var j = 0; j <= 6; j++){
 							controller.proBuild[name].push({"id": stats["item" + j], 
 								"imgsrc": "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" 
 								+ stats["item" + j] + ".png"});
 						}
-						console.log(proBuild);
+						console.log(controller.proBuild);
 						break;
 					}
 				}
 			})
 		}
-		getPlayerId(controller.players[p], help);
+		getPlayerId(controller.players[p], addBuild);
 	};
 
 	this.select = function(name){
