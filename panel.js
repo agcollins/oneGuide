@@ -20,8 +20,59 @@ app.controller('PanelController', ['$cookies', '$modal', '$scope', function($coo
 	$scope.players = this.players;
 	$scope.allSelected = this.allSelected;
 	$scope.selected = this.selected;
+	
+	var controller = this;
+	console.log('hello');
+
+	var getGuide = function(player){
+		console.log("I am here.");
+
+		function getQueryStringValue (key) {  
+			return unescape(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+		}  
+
+		function getPlayerId(name){
+			$http.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+name+'?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff').success(function(data){
+				return data[name].id;
+			}); 
+		}
+
+		var proBuild = [];
+		controller.selectedID = getQueryStringValue("champion");
+
+		$http.get("https://na.api.pvp.net/api/lol/static-data/na/v1.2/champion?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff").success(function(data){
+			var champs = data["data"]
+			for (var key in champs){
+				if(champs[key].id == controller.selectedID){
+					controller.selectedChampion = champs[key];
+					controller.selectedChampion["squareimg"] = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" + key + ".png";
+					controller.selectedChampion["loadingimg"] = "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + key + "_0.jpg";
+				}
+				controller.champions.push(champs[key]);
+				controller.champNames.push(champs[key]["name"]);
+			}
+		});
+
+		$http.get("https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/" + getPlayerId(player) + "/recent?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff").success(function(data) {
+			var games = data.games;
+			for(var i = 0; i < games.length; i++){
+				game = games[i];
+				if(game.championId == controller.selectedID){
+					var stats = game.stats;
+					for(var j = 1; j <= 6; j++){
+						proBuild.push({"id": stats["item" + j], 
+							"imgsrc": "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" 
+							+ stats["item" + j] + ".png"});
+					}
+					console.log(proBuild);
+					return proBuild;	
+				}
+			};
+		});
+	};	
 
 	this.select = function(name){
+
 		if(!name || (name === 'all' && !this.allSelected)){
 			this.selected=[]; //this is to prevent cases where a player is selected then added into the list again when the 'all' button is pushed. I don't know if this would cause any bugs, but I'm just doing this to be safe.
 
