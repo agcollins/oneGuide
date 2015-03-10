@@ -16,8 +16,6 @@
 				controller.champions[key] = champs[key]["id"];
 				controller.champNames.push(champs[key]["name"]);
 			}
-
-			console.log(controller.champNames);
 		});
 		
 		controller.isValidName = function(){

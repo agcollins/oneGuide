@@ -1,6 +1,6 @@
 var app = angular.module('panelModule', ['ui.bootstrap', 'ngCookies']);
 
-app.controller('PanelController', ['$cookies', '$modal', function($cookies, $modal){
+app.controller('PanelController', ['$cookies', '$modal', '$scope', function($cookies, $modal, $scope){
 	//look for cookie
 	//NOTE: this behavior is deprecated. In newer angular, cookies use .get and .put functions, but we are using
 	//1.3.14, which doesn't have this yet.
@@ -16,6 +16,11 @@ app.controller('PanelController', ['$cookies', '$modal', function($cookies, $mod
 	this.players = playersCookie.players;	
 	this.allSelected = playersCookie.allSelected;
 	this.selected = playersCookie.selected;
+
+	$scope.players = this.players;
+	$scope.allSelected = this.allSelected;
+	$scope.selected = this.selected;
+
 	this.select = function(name){
 		if(!name || (name === 'all' && !this.allSelected)){
 			this.selected=[]; //this is to prevent cases where a player is selected then added into the list again when the 'all' button is pushed. I don't know if this would cause any bugs, but I'm just doing this to be safe.
@@ -89,13 +94,6 @@ app.controller('PanelController', ['$cookies', '$modal', function($cookies, $mod
 		});
 	};
 }]);
-
-app.factory('selectedPlayers', function(){
-	return {
-		players: app.controller('PanelController').players,
-		selected: app.controller('PanelController').selected
-	};
-});
 
 //this is what actually controls the modal
 //we get 'players' because we passed it using the resolve key in the above $modal.open function

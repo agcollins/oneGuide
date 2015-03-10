@@ -54,17 +54,16 @@
 							<img ng-src="{{build.selectedChampion.loadingimg}}">
 						</div>
 
-						<div class="col-sm-8" ng-controller="AccController as acc">
+						<div class="col-sm-8">
 							<h1 id="championname" style="color:#9D9D9D">{{build.selectedChampion.name}}</h1>
 							<accordion close-others="false">
-							<accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-								<div class="well">
-									<h4 style="margin-top:0px">Final Build</h4>
-									<span ng-repeat="item in build.proBuild">
-										<img ng-src="{{item.imgsrc}}" style="display:inline-block; padding-right:5px"/>		
-									</span>
-								</div>
-							</accordion-group>
+								<accordion-group heading="{{player}}" ng-show="panel.isSelected(player)" ng-repeat="player in panel.players">
+									<div class="well">
+										<span ng-repeat="item in build.proBuild">
+											<img ng-src="{{item.imgsrc}}" style="display:inline-block; padding-right:5px"/>	
+										</span>
+									</div>
+								</accordion-group>
 							</accordion>
 						</div>
 					</div>	
