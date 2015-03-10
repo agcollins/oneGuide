@@ -29,7 +29,7 @@
 
     <title>oneGuide.lol</title>
   </head>
-  <body style="background-color:#222">
+  <body style="background-image:url('background.jpg')">
     <nav class="navbar navbar-inverse">
       <div class="container-fluid"  ng-controller="SearchController as search">
 	<div class="navbar-header">
@@ -47,10 +47,22 @@
 
     <div class="container-fluid">
       <div class="row">
-	<div class="col-sm-12" ng-controller="CarController as carousel" >
-	  <h2 style="text-align:center; color:white !important; text-shadow:0px -1px 0px rgba(0, 0, 0, 0.25); margin-top:0">
-	    Free Champion Rotation</h2>
-	  <div style="height:500px; width:85%; margin-left:auto; margin-right:auto;"> 
+
+	<div class="col-sm-4">
+		<!--Here's where we have the welcome thingy -->	
+		<div class="jumbotron">
+			<h2><b>welcome to oneGuide.</b></h2>
+			<blockquote>
+				<p>oneGuide is your only source for dynamically-built guides for the League of Legends players of your choice. Pros or not,
+			you can have the build you're looking for right at your fingertips.</p>
+			</blockquote>
+		</div>
+	</div>
+
+	<div class="col-sm-8" ng-controller="CarController as carousel" >
+	  <h3 style="text-align:center; color:white !important; text-shadow:0px -1px 0px rgba(0, 0, 0, 0.25); margin-top:0">
+			free champion rotation</h3>
+	  <div style="height:100%; width:100%; margin-left:auto; margin-right:auto;"> 
 	    <carousel interval="3000" style="border: 5px solid #3c3c3c;" >
 	      <slide ng-repeat="champ in carousel.freeChamps" active="slide.active">
 		<a href="{{champ.href}}">
