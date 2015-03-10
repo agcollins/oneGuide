@@ -59,7 +59,7 @@
 							<accordion close-others="false">
 								<accordion-group heading="{{player}}" ng-show="panel.isSelected(player)" ng-repeat="player in panel.players">
 									<div class="well">
-										<span >
+										<span ng-repeat="item in panel.getGuide(player)">
 											<img ng-src="{{item.imgsrc}}" style="display:inline-block; padding-right:5px"/>	
 										</span>
 									</div>

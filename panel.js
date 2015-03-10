@@ -22,7 +22,6 @@ app.controller('PanelController', ['$cookies', '$modal', '$scope', function($coo
 	$scope.selected = this.selected;
 	
 	var controller = this;
-	console.log('hello');
 
 	var getGuide = function(player){
 		console.log("I am here.");
