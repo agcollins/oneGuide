@@ -1,3 +1,3 @@
-(function(){
-	var app = angular.module('championApp', ['buildModule', 'panelModule','searchModule','accordionModule']);
-})();
+var app = angular.module('championApp', ['championControllers']);
+    
+angular.module('championControllers', ['buildModule','panelModule', 'searchModule', 'accordionModule']);

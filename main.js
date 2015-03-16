@@ -1,3 +1,3 @@
-(function(){
-	var app = angular.module('mainApp', ['ui.bootstrap','carouselModule','searchModule']);
-})();
+var app = angular.module('mainApp', ['ui.bootstrap', 'mainControllers']);
+    
+angular.module('mainControllers', ['carouselModule', 'searchModule']);
