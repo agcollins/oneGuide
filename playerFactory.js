@@ -1,6 +1,9 @@
+/*global angular, controller*/
+
 var app = angular.module('playerModule', []);
 
 app.factory('playerFactory', function ($scope, $http, $cookies) {
+    "use strict";
     
     var getChampionsWithImages, playersCookie, playersCookieObj, jsonplayers, data;
     playersCookie = JSON.parse($cookies.oneGuide_players);

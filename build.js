@@ -26,5 +26,5 @@ app.controller("BuildController", ['$http', function ($http) {
             controller.champNames.push(champs[key]["name"]);
         }
     });
-
+    
 }]);
