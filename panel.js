@@ -1,16 +1,17 @@
 var app = angular.module('panelModule', ['ui.bootstrap', 'ngCookies']);
 
-app.controller('PanelController', ['$cookies', '$modal', '$scope', '$http', function($cookies, $modal, $scope, $http){
+app.controller('PanelController', ['$cookies', '$modal', '$scope', '$http', 'playerFactory', function ($cookies, $modal, $scope, $http, playerFactory) {
 	//look for cookie
 	//NOTE: this behavior is deprecated. In newer angular, cookies use .get and .put functions, but we are using
 	//1.3.14, which doesn't have this yet.
 	var playersCookie = $cookies.oneGuide_players;
 
-	if(playersCookie == undefined){
+	if (playersCookie == undefined) {
 		var playersCookieObj = {"selected": [], "allSelected": false, "players": []};
 		var jsonplayers = JSON.stringify(playersCookieObj);
 		$cookies.oneGuide_players = JSON.stringify(playersCookieObj);
 	}
+    
 	playersCookie = JSON.parse($cookies.oneGuide_players);
 
 	this.players = playersCookie.players;	

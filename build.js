@@ -1,6 +1,6 @@
 var app = angular.module("buildModule", []);
 
-app.controller("BuildController", ['$http', function ($http) {
+app.controller("BuildController", ['$http', 'playerFactory', function ($http, playerFactory) {
     
     var controller = this;
     controller.champions = [];
