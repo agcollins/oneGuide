@@ -11,7 +11,7 @@ app.controller('PanelController', ['$cookies', '$modal', '$scope', '$http', 'pla
 		var jsonplayers = JSON.stringify(playersCookieObj);
 		$cookies.oneGuide_players = JSON.stringify(playersCookieObj);
 	}
-    
+
 	playersCookie = JSON.parse($cookies.oneGuide_players);
 
 	this.players = playersCookie.players;	
@@ -51,12 +51,12 @@ app.controller('PanelController', ['$cookies', '$modal', '$scope', '$http', 'pla
 					game = games[i];
 					if(game.championId == controller.selectedID){
 						var stats = game.stats;
-					    console.log(game.stats);
+						console.log(game.stats);
 						for(var j = 0; j <= 6; j++){
-						    if(stats["item" + j] != undefined)
-							controller.proBuild[name].push({"id": stats["item" + j], 
-								"imgsrc": "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" 
-								+ stats["item" + j] + ".png"});
+							if(stats["item" + j] != undefined)
+								controller.proBuild[name].push({"id": stats["item" + j], 
+									"imgsrc": "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" 
+										+ stats["item" + j] + ".png"});
 						}
 						break;
 					}
@@ -118,15 +118,15 @@ app.controller('PanelController', ['$cookies', '$modal', '$scope', '$http', 'pla
 	this.openModal = function() {
 		var addPlayerModal = $modal.open({
 			templateUrl: 'addPlayerModal.html',
-				controller: 'AddPlayerController as addPlayer',
-				size: 'lg',
+			controller: 'AddPlayerController as addPlayer',
+			size: 'lg',
 				//here we pass the modal the current players
-				resolve: {
-					players: function() {
-						//slice because we want a copy
-						return panel.players.slice();
-					}
+			resolve: {
+				players: function() {
+					//slice because we want a copy
+					return panel.players.slice();
 				}
+			}
 		});
 
 		//this is triggered when this modal goes away
@@ -148,8 +148,8 @@ angular.module('panelModule').controller('AddPlayerController', function($http, 
 	modalController.players = players;
 	modalController.summonerName = undefined;
 	modalController.alertClasses = 
-{'alert-danger': false,
-	'alert': true};
+	{'alert-danger': false,
+		'alert': true};
 	modalController.alertMsg = "Player added!";
 	modalController.submitted = false;
 
@@ -183,17 +183,17 @@ angular.module('panelModule').controller('AddPlayerController', function($http, 
 		}
 	};
 
-modalController.remove = function(player) {
-	var playerIndex = modalController.players.indexOf(player);
-	console.log(playerIndex);
-	modalController.players.splice(playerIndex, 1);
-};
+	modalController.remove = function(player) {
+		var playerIndex = modalController.players.indexOf(player);
+		console.log(playerIndex);
+		modalController.players.splice(playerIndex, 1);
+	};
 
-modalController.save = function () {
-	$modalInstance.close(modalController.players);
-};
+	modalController.save = function () {
+		$modalInstance.close(modalController.players);
+	};
 
-modalController.cancel = function () {
-	$modalInstance.dismiss('cancel');
-};
+	modalController.cancel = function () {
+		$modalInstance.dismiss('cancel');
+	};
 });

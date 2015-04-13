@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html ng-app="mainApp"> 
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<script src="dependencies/js/jquery.min.js"></script>
+		<link rel="stylesheet" href="dependencies/css/bootstrap.min.css">
+		<link rel="stylesheet" href="dependencies/css/boostrap-theme.min.css">
+
+		<script src="dependencies/js/bootstrap.min.js"></script>
+		<script src="dependencies/js/angular.min.js"></script>
+		<script src="dependencies/js/angular-route.min.js"></script>
+		<script src="dependencies/js/bootstrap-directives.js"></script>
+
+		<script src="main.js"></script>
+		<script src="carousel.js"></script>
+		<script src="search.js"></script>
+		<script src="champion.js"></script>
+		<script src="panel.js"></script>
+		<script src="build.js"></script>
+		<script src="accordion.js"></script>
+		<script src="playerFactory.js"></script>
+
+		<title>oneGuide.lol</title>
+	</head>
+	<body style="background-image:url('img/background.jpg')">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid"  ng-controller="SearchController as search">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.html">oneGuide</a>
+				</div>
+				<form name="searchForm" class="navbar-form navbar-left" role="search" novalidate>
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="search.selectedChamp"
+						typeahead="name for name in search.champNames | filter:$viewValue | limitTo:8" autocomplete="off" placeholder="champion name">
+					</div>
+					<button type="submit" class="btn btn-default" ng-click="search.loadBuild()" ng-disabled="!search.isValidName()">submit</button>
+				</form>
+			</div>
+		</nav>
+		<div ng-view></div>
+	</body>
+</html>
+
