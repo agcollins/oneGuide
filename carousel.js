@@ -1,4 +1,3 @@
-
 var app = angular.module('carouselModule', []);
 
 app.controller("CarController", ['$location','$http', function($location, $http){
@@ -14,6 +13,7 @@ app.controller("CarController", ['$location','$http', function($location, $http)
 				data["imgsrc"] = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + name + "_0.jpg";
 				var loc = window.location.pathname;
 				var dir = loc.substring(0, loc.lastIndexOf('/'));
+				console.log($location.absUrl());
 				data["href"] = dir + '/champion/' + data.id;
 				controller.freeChamps.push(data);
 			});
