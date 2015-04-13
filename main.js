@@ -9,6 +9,9 @@ app.config(['$routeProvider', function($routeProvider){
 	.when('/champion', {
 		templateUrl: 'routes/champion.html'	
 	})	
+	.when('', {
+		redirectTo: '/welcome'
+	})
 	.otherwise({
 		redirectTo: '/welcome'
 	});
