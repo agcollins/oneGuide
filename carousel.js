@@ -12,9 +12,9 @@ app.controller("CarController", ['$location','$http', function($location, $http)
 				var name = data.key;
 				data["imgsrc"] = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + name + "_0.jpg";
 				var loc = window.location.pathname;
-				var dir = loc.substring(0, loc.lastIndexOf('/'));
+				var dir = loc.substring(0, loc.indexOf('welcome'));
 				console.log($location.absUrl());
-				data["href"] = dir + '/champion/' + data.id;
+				data["href"] = '#/champion/' + data.id;
 				controller.freeChamps.push(data);
 			});
 		});

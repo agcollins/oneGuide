@@ -2,56 +2,63 @@
 
 var app = angular.module('playerModule', []);
 
-app.factory('playerFactory', function ($scope, $http, $cookies) {
+app.factory('playerFactory', ['$scope', '$cookies', function ($scope, $cookies) {
 	"use strict";
 
 	var getChampionsWithImages, playersCookie, playersCookieObj, jsonplayers, data;
 	playersCookie = JSON.parse($cookies.oneGuide_players);
 
-	if (playersCookie === undefined) {
+	data = {};
+	data.getAllChampions = getAllChampions;
+	data.getChampionByID = getChampionByID;
+	data.getChampionImageByName = getChampionImageByName; 
+	data.getPlayerIDByName = getPlayerIDByName;
+	data.getCookie = getCookie;
 
-		playersCookieObj = {"selected": [], "allSelected": false, "players": []};
-		jsonplayers = JSON.stringify(playersCookieObj);
+	getAllChampions = function () {
+		return $http.get("https://na.api.pvp.net/api/lol/static-data/na/v1.2/champion?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff");
+	};
 
-		$cookies.oneGuide_players = jsonplayers;
-		playersCookie = JSON.parse($cookies.oneGuide_players);
-
+	getChampionByID = function(query){
+		var url;
+		url = 'http://na.api.pvp.net/api/lol/static-data/na/v1.2/champion/' + query + '?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff';
+		return $http.get(url);
 	}
 
-	data = {};
-	data.players = playersCookie.players;
-	data.allSelected = playersCookie.allSelected;
-	data.selected = playersCookie.selected;
-	data.champions = getChampionsWithImages();
+	getChampionImageByName = function(query) {
+		var url;
+		url = "https://na.api.pvp.net/api/lol/static-data/na/v1.2/champion/" + query + "?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff";
+		return $http.get(url);
+	}
 
-	getChampionsWithImages = function () {
+	getCookie = function() {
+		playersCookie = $cookies.oneGuide_players;
 
-		$http.get("https://na.api.pvp.net/api/lol/static-data/na/v1.2/champion?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff").success(function (data) {
-			var champs = data.data, key;
+		if (playersCookie === undefined) {
+		
+			playersCookieObj = {"selected": [], "allSelected": false, "players": []};
+			jsonplayers = JSON.stringify(playersCookieObj);	
 
-			for (key in champs) {
+			$cookies.oneGuide_players = jsonplayers;
+			playersCookie = JSON.parse($cookies.oneGuide_players);
+			
+		}
 
-				if (champs.hasOwnProperty(key)) {
+		return playersCookie;
+	}
 
-					if (champs[key].id == controller.selectedID) {
-
-						controller.selectedChampion = champs[key];
-						controller.selectedChampion.squareimg = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/" + key + ".png";
-						controller.selectedChampion.loadingimg = "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + key + "_0.jpg";
-
-					}
-
-					controller.champions.push(champs[key]);
-					controller.champNames.push(champs[key].name);
-
-				}
-
-			}
-		});
-
-	};
+	getPlayerIDByName = function(name) {
+		var url;
+		url = 'https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + name + '?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff';
+		return $http.get(url);
+	}
 
 	return {
 		data: data
 	};
-});
+
+	getItemImageUrl = function(){
+		return 2;	
+	};
+
+}]);

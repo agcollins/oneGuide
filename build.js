@@ -1,6 +1,6 @@
 var app = angular.module("buildModule", []);
 
-app.controller("BuildController", ['$location','$http', 'playerFactory', function ($location, $http, playerFactory) {
+app.controller("BuildController", ['$routeParams', '$location', '$http', 'playerFactory', 'fuckFactory', function ($routeParams, $location, $http, playerFactory, fuckFactory) {
 
 	var controller = this;
 	controller.champions = [];
@@ -8,13 +8,12 @@ app.controller("BuildController", ['$location','$http', 'playerFactory', functio
 	controller.proBuild = [];
 	controller.builds = {};
 
-	var getChampionID = function(){
-		path = $location.path();
-		path = path.substring(path.indexOf('champion/'));
-		console.log(path);
-		return path;
+	var getChampionID = function () {
+		return $routeParams.param;
 	};
 
+	console.log('hello');
+	fuckFactory.method();
 	controller.selectedID = getChampionID();
 
 	$http.get("https://na.api.pvp.net/api/lol/static-data/na/v1.2/champion?api_key=43e187ef-e56e-4f24-bd58-1dbdc841abff").success(function (data) {

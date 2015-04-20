@@ -2,17 +2,12 @@ var app = angular.module('mainApp', ['ui.bootstrap', 'mainControllers', 'ngRoute
 
 angular.module('mainControllers', ['carouselModule', 'searchModule']);
 
-app.config(['$routeProvider', function($routeProvider){
+app.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider.when('/welcome', {
-		templateUrl: 'routes/welcome.html'	
+		templateUrl: 'routes/welcome.html'
 	})
-	.when('/champion', {
-		templateUrl: 'routes/champion.html'	
-	})	
-	.when('', {
-		redirectTo: '/welcome'
-	})
-	.otherwise({
-		redirectTo: '/welcome'
+	.when('/champion/:param', {
+		templateUrl: 'routes/champion.html',
+		controller: 'PanelController as panel'
 	});
 }]);

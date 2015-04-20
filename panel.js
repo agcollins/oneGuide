@@ -4,26 +4,7 @@ app.controller('PanelController', ['$cookies', '$modal', '$scope', '$http', 'pla
 	//look for cookie
 	//NOTE: this behavior is deprecated. In newer angular, cookies use .get and .put functions, but we are using
 	//1.3.14, which doesn't have this yet.
-	var playersCookie = $cookies.oneGuide_players;
-
-	if (playersCookie == undefined) {
-		var playersCookieObj = {"selected": [], "allSelected": false, "players": []};
-		var jsonplayers = JSON.stringify(playersCookieObj);
-		$cookies.oneGuide_players = JSON.stringify(playersCookieObj);
-	}
-
-	playersCookie = JSON.parse($cookies.oneGuide_players);
-
-	this.players = playersCookie.players;	
-	this.allSelected = playersCookie.allSelected;
-	this.selected = playersCookie.selected;
-
-	$scope.players = this.players;
-	$scope.allSelected = this.allSelected;
-	$scope.selected = this.selected;
-
-	var controller = this;
-	controller.proBuild = [];
+	var playersCookie = playerFactory.getCookie(); 
 
 	function getQueryStringValue (key) {  
 		return unescape(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
